@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new PassingCars();
+            new CountDiv();
+            //new PassingCars();
             //new MissingInteger();
             //new MaxCounter();
             //new PermCheck();
