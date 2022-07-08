@@ -10,7 +10,7 @@ namespace Codility
         {
 
             Debug.Assert(solution(new int[] { 2, 3, 1, 5 }) == 4);
-            Debug.Assert(solution(new int[0] ) == 1);
+            Debug.Assert(solution(new int[0]) == 1);
             Debug.Assert(solution(new int[] { 2 }) == 1);
             Debug.Assert(solution(new int[] { 1 }) == 2);
             Debug.Assert(solution(new int[] { 2, 3, 1, 4, 5 }) == 6);

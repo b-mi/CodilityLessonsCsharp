@@ -24,7 +24,7 @@ namespace Codility
             }
             foreach (var keyValue in dct)
             {
-                if( keyValue.Value % 2 == 1)
+                if (keyValue.Value % 2 == 1)
                     return keyValue.Key;
             }
             throw new NotImplementedException();

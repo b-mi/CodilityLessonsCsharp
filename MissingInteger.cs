@@ -7,9 +7,9 @@ namespace Codility
     {
         public MissingInteger()
         {
-           // var rtn = solution(new int[] { 1, 3, 6, 4, 1, 2 });
-           var rtn = solution(new int[] { -1, -3 });
-           // var rtn = solution(new int[] { 7, 6, 0, -2, 1, 2, 3, 5, 5, 4 });
+            // var rtn = solution(new int[] { 1, 3, 6, 4, 1, 2 });
+            var rtn = solution(new int[] { -1, -3 });
+            // var rtn = solution(new int[] { 7, 6, 0, -2, 1, 2, 3, 5, 5, 4 });
         }
 
 

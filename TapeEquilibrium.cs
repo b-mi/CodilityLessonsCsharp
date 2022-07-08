@@ -8,7 +8,7 @@ namespace Codility
     {
         public TapeEquilibrium()
         {
-           // Debug.Assert(solution(new int[] { 3, 1, 2, 4, 3 }) == 1);
+            // Debug.Assert(solution(new int[] { 3, 1, 2, 4, 3 }) == 1);
 
             Debug.Assert(solution(new int[] { -5, 7 }) == 1);
 

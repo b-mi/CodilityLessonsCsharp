@@ -19,9 +19,9 @@
                 {
                     leaves[leaf - 1] = true;
                     leavesCount++;
-                    if( leavesCount == X)
+                    if (leavesCount == X)
                     {
-                        return idx; 
+                        return idx;
                     }
                 }
             }

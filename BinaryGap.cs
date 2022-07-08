@@ -8,7 +8,7 @@ namespace Codility
     {
         public BinaryGap()
         {
-            Debug.Assert(solution(1041) == 52 );
+            Debug.Assert(solution(1041) == 52);
             Debug.Assert(solution(32) == 0);
             Debug.Assert(solution(69) == 3);
             Console.ReadKey();
