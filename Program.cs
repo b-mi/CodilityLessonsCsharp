@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new Distinct();
+            new MaxProductOfThree();
+            //new Distinct();
             //new MinAvgTwoSlice();
             //new GenomicRangeQuery();
             //new CountDiv();
@@ -20,7 +21,7 @@ namespace Codility
             //new PermCheck();
             //new FrogRiverOne();
             //new TapeEquilibrium();
-            // new PermMissingElements();
+            //new PermMissingElements();
             //new FrogJmp();
             //new OddOccurrencesInArray();
             //new BinaryGap();
