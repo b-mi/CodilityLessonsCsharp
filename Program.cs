@@ -10,7 +10,9 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new CountDiv();
+            //new Tests().TestPointTuple();
+            new GenomicRangeQuery();
+            //new CountDiv();
             //new PassingCars();
             //new MissingInteger();
             //new MaxCounter();
@@ -22,6 +24,8 @@ namespace Codility
             //new OddOccurrencesInArray();
             //new BinaryGap();
             //new CyclicRotation();
+            Console.WriteLine("done");
+            Console.ReadKey();
         }
 
     }
