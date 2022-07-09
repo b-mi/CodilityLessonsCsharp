@@ -31,18 +31,18 @@ namespace Codility
         {
             var minAvg = double.MaxValue;
             int bestStartIdx = -1;
-            int count = 0;
+            int sumLength = 0;
             int sum = 0;
             double avg;
             for (int start = 0; start < A.Length - 1; start++)
             {
-                count = 1;
+                sumLength = 1;
                 sum = A[start];
                 for (int j = start + 1; j < A.Length; j++)
                 {
                     sum += A[j];
-                    count++;
-                    avg = (double)sum / (double)count;
+                    sumLength++;
+                    avg = (double)sum / (double)sumLength;
                     if (avg < minAvg)
                     {
                         minAvg = avg;
