@@ -7,30 +7,25 @@ namespace Codility
 {
     internal class MinAvgTwoSlice
     {
+        private readonly int MAX_LENGTH = 4; // slightly speculative
+
         public MinAvgTwoSlice()
         {
             var sw = new Stopwatch();
             var N = 100_000;
             var data = getSampleData(N);
             sw.Start();
-            var rtn = solution(data);
+            var rtn = solution(data, out var bestLength);
             sw.Stop();
             var ela = sw.ElapsedMilliseconds;
-            Console.WriteLine($"{ela}");
-
-            //var data = new int[] { 4, 2, 2, 5, 1, 5, 8 };
-            //var rtn = getBruteForce(data);
-
-            //var data = new int[] { 4, 2, 1, 5, 1, 5, 8 };
-            //var rtn = getBruteForce(data);
-
-            //solution(new int[] { 4, 2, 1, 5, 1, 5, 8 });
+            Console.WriteLine($"{ela}, {rtn}, {bestLength}");
         }
 
-        public int solution(int[] A)
+        public int solution(int[] A, out int bestLength)
         {
             var minAvg = double.MaxValue;
             int bestStartIdx = -1;
+            bestLength = -1;
             int sumLength = 0;
             int sum = 0;
             double avg;
@@ -42,11 +37,16 @@ namespace Codility
                 {
                     sum += A[j];
                     sumLength++;
+                    if( sumLength > MAX_LENGTH)
+                    {
+                        break;
+                    }
                     avg = (double)sum / (double)sumLength;
                     if (avg < minAvg)
                     {
                         minAvg = avg;
                         bestStartIdx = start;
+                        bestLength = sumLength;
                     }
                 }
             }
