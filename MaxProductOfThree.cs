@@ -10,8 +10,10 @@ namespace Codility
         {
 
             //int rtn = solution(new int[] { -3, 1, 2, -2, 5, 6 });
-            int rtn = solution(new int[] { -10, -2, -4 });
+            //int rtn = solution(new int[] { -10, -2, -4 });
             //int rtn = solution(new int[] { -10, -2, -4, -1 });
+            int rtn = solution(new int[] { 4, 7, 3, 2, 1, -3, -5 }); // 105
+
         }
 
         public int solution(int[] A)
