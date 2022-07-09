@@ -16,6 +16,7 @@ namespace Codility
             var rtn = solution(data);
             sw.Stop();
             var ela = sw.ElapsedMilliseconds;
+            Console.WriteLine($"{ela}");
 
             //var data = new int[] { 4, 2, 2, 5, 1, 5, 8 };
             //var rtn = getBruteForce(data);
