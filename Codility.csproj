@@ -52,6 +52,7 @@
     <Compile Include="FrogRiverOne.cs" />
     <Compile Include="GenomicRangeQuery.cs" />
     <Compile Include="MaxCounter.cs" />
+    <Compile Include="MinAvgTwoSlice.cs" />
     <Compile Include="MissingInteger.cs" />
     <Compile Include="OddOccurrencesInArray.cs" />
     <Compile Include="PassingCars.cs" />
