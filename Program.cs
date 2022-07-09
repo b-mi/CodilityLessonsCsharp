@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new MinAvgTwoSlice();
+            new Distinct();
+            //new MinAvgTwoSlice();
             //new GenomicRangeQuery();
             //new CountDiv();
             //new PassingCars();
