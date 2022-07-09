@@ -19,11 +19,25 @@ namespace Codility
         }
 
         Dictionary<Tuple<int, int>, int> memo = new Dictionary<Tuple<int, int>, int>();
-        private string S;
+        List<List<int>> ranges = new List<List<int>>();
+        List<int> iS = new List<int>();
+
         public int[] solution(string S, int[] P, int[] Q)
         {
+            ranges.Add(new List<int>());
+            ranges.Add(new List<int>());
+            ranges.Add(new List<int>());
+            ranges.Add(new List<int>());
+            ranges.Add(new List<int>());
             List<int> results = new List<int>();
-            this.S = S;
+
+            for (int i = 0; i < S.Length; i++)
+            {
+                var factor = getCharFactor(S[i]);
+                this.iS.Add(factor);
+                //ranges[factor].Add(i);
+            }
+
             for (int iRange = 0; iRange < P.Length; iRange++)
                 results.Add(getFactor(P[iRange], Q[iRange]));
 
@@ -39,10 +53,10 @@ namespace Codility
             //  Nucleotides of types A, C, G and T have impact factors of 1, 2, 3 and 4, respectively.
             if (start == end)
             {
-                return getCharFactor(S[start]);
+                return iS[start];
             }
 
-            var f = Math.Min(getCharFactor(S[end]), getFactor(start, end - 1));
+            var f = Math.Min(iS[end], getFactor(start, end - 1));
             memo.Add(tpl, f);
             return f;
         }
