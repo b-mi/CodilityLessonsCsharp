@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Codility
 {
@@ -6,10 +7,74 @@ namespace Codility
     {
         public Triangle()
         {
-            test();
+            //var aa = new int[] { 10, 2, 5, 1, 8, 20 };
+            //solution(new int[] { 20, int.MinValue, int.MaxValue, int.MinValue, int.MaxValue }); // 5, 8, 10
+            solution(new int[] { 10, 2, 5, 1, 8, 20, int.MinValue, int.MaxValue }); // 5, 8, 10
+
+
         }
 
         /*
+         
+extreme_arith_overflow1
+overflow test, 3 MAXINTs✘WRONG ANSWER
+got 0 expected 1         
+         */
+
+
+        public int solution(int[] A)
+        {
+            if (A.Length < 3)
+                return 0; // no triangle
+            Array.Sort(A);
+            int pValue, qValue, rValue;
+            long maxValue;
+            for (int p = 0; p < A.Length - 2; p++)
+            {
+                pValue = A[p];
+                for (int q = p + 1; q < A.Length - 1; q++)
+                {
+                    qValue = A[q];
+                    maxValue = (long)pValue + (long)qValue - 1;
+                    rValue = A[q + 1];
+
+                    if ((long)rValue <= maxValue)
+                        return 1;
+                }
+            }
+            return 0;
+        }
+
+
+        private void test()
+        {
+
+            var a = isTriangle(10, 5, 8);
+            int pMin = 12, pMax = 12;
+            int qMin = 56, qMax = 56;
+            int rMin = -1000, rMax = 1000;
+
+
+            for (int p = pMin; p <= pMax; p++)
+            {
+                for (int q = qMin; q <= qMax; q++)
+                {
+                    for (int r = rMin; r <= rMax; r++)
+                    {
+                        if (isTriangle(p, q, r))
+                            Console.WriteLine($"{p}, {q}, {r}");
+                    }
+                }
+            }
+        }
+
+        private static bool isTriangle(int p, int q, int r)
+        {
+            return p + q > r && q + r > p && r + p > q;
+        }
+    }
+
+    /*
 12, 12, 1
 12, 12, 2
 12, 12, 3
@@ -85,35 +150,8 @@ done
 12, 56, 67
 done
 
-         
-         
-         */
-
-        private void test()
-        {
-
-            var a = isTriangle(10, 5, 8);
-            int pMin = 12, pMax = 12;
-            int qMin = 56, qMax = 56;
-            int rMin = -1000, rMax = 1000;
 
 
-            for (int p = pMin; p <= pMax; p++)
-            {
-                for (int q = qMin; q <= qMax; q++)
-                {
-                    for (int r = rMin; r <= rMax; r++)
-                    {
-                        if (isTriangle(p, q, r))
-                            Console.WriteLine($"{p}, {q}, {r}");
-                    }
-                }
-            }
-        }
+     */
 
-        private static bool isTriangle(int p, int q, int r)
-        {
-            return p + q > r && q + r > p && r + p > q;
-        }
-    }
 }
