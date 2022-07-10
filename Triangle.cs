@@ -45,13 +45,14 @@ Killed. Hard limit reached: 6.000 sec.
             int pValue, qValue, rValue;
             int? lastPValue = null;
             long maxValue;
+            int aLength_1 = A.Length - 1;
             for (int p = 0; p < A.Length - 2; p++)
             {
                 pValue = A[p];
                 if (lastPValue.HasValue && pValue == lastPValue.Value)
                     continue;
                 lastPValue = pValue;
-                for (int q = p + 1; q < A.Length - 1; q++)
+                for (int q = p + 1; q < aLength_1; q++)
                 {
                     qValue = A[q];
                     maxValue = (long)pValue + (long)qValue - 1;
@@ -69,9 +70,9 @@ Killed. Hard limit reached: 6.000 sec.
         {
 
             var a = isTriangle(10, 5, 8);
-            int pMin = 12, pMax = 12;
-            int qMin = 1000, qMax = 1000;
-            int rMin = -3000, rMax = 3000;
+            int pMin = 50, pMax = 50;
+            int qMin = 10_000, qMax = 10_000;
+            int rMin = 10_000, rMax = 20_000;
 
 
             for (int p = pMin; p <= pMax; p++)
