@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Codility
 {
@@ -7,18 +9,30 @@ namespace Codility
     {
         public Triangle()
         {
+            //test();
+            var lst = new List<int>();
+            var rnd = new Random(7);
+            for (int i = 0; i < 100_000; i++)
+            {
+                lst.Add(rnd.Next(-1_000_000, 0));
+            }
+            var sw = new Stopwatch();
+            sw.Start();
+            var aa = solution(lst.ToArray());
+            sw.Stop();
+            Console.WriteLine($"{sw.Elapsed}: {aa}");
             //var aa = new int[] { 10, 2, 5, 1, 8, 20 };
             //solution(new int[] { 20, int.MinValue, int.MaxValue, int.MinValue, int.MaxValue }); // 5, 8, 10
-            solution(new int[] { 10, 2, 5, 1, 8, 20, int.MinValue, int.MaxValue }); // 5, 8, 10
+            //solution(new int[] { 10, 2, 5, 1, 8, 20, int.MinValue, int.MaxValue }); // 5, 8, 10
 
 
         }
 
         /*
          
-extreme_arith_overflow1
-overflow test, 3 MAXINTs✘WRONG ANSWER
-got 0 expected 1         
+large_negative
+chaotic sequence of negative values from [-1M..-1], length=100K✘TIMEOUT ERROR
+Killed. Hard limit reached: 6.000 sec.      
          */
 
 
@@ -27,11 +41,16 @@ got 0 expected 1
             if (A.Length < 3)
                 return 0; // no triangle
             Array.Sort(A);
+
             int pValue, qValue, rValue;
+            int? lastPValue = null;
             long maxValue;
             for (int p = 0; p < A.Length - 2; p++)
             {
                 pValue = A[p];
+                if (lastPValue.HasValue && pValue == lastPValue.Value)
+                    continue;
+                lastPValue = pValue;
                 for (int q = p + 1; q < A.Length - 1; q++)
                 {
                     qValue = A[q];
@@ -51,8 +70,8 @@ got 0 expected 1
 
             var a = isTriangle(10, 5, 8);
             int pMin = 12, pMax = 12;
-            int qMin = 56, qMax = 56;
-            int rMin = -1000, rMax = 1000;
+            int qMin = 1000, qMax = 1000;
+            int rMin = -3000, rMax = 3000;
 
 
             for (int p = pMin; p <= pMax; p++)
