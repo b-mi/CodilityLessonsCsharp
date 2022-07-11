@@ -9,7 +9,6 @@ namespace Codility
     {
         public Triangle()
         {
-            //test();
             var lst = new List<int>();
             var rnd = new Random(7);
             for (int i = 0; i < 100_000; i++)
@@ -21,23 +20,14 @@ namespace Codility
             var aa = solution(lst.ToArray());
             sw.Stop();
             Console.WriteLine($"{sw.Elapsed}: {aa}");
-            //var aa = new int[] { 10, 2, 5, 1, 8, 20 };
-            //solution(new int[] { 20, int.MinValue, int.MaxValue, int.MinValue, int.MaxValue }); // 5, 8, 10
-            //solution(new int[] { 10, 2, 5, 1, 8, 20, int.MinValue, int.MaxValue }); // 5, 8, 10
-
-
         }
-
-        /*
-         
-large_negative
-chaotic sequence of negative values from [-1M..-1], length=100K✘TIMEOUT ERROR
-Killed. Hard limit reached: 6.000 sec.      
-         */
 
 
         public int solution(int[] A)
         {
+            if (A.Length < 3)
+                return 0; // no triangle
+            A = A.Where(i => i > 0).ToArray();
             if (A.Length < 3)
                 return 0; // no triangle
             Array.Sort(A);
@@ -70,9 +60,9 @@ Killed. Hard limit reached: 6.000 sec.
         {
 
             var a = isTriangle(10, 5, 8);
-            int pMin = 50, pMax = 50;
-            int qMin = 10_000, qMax = 10_000;
-            int rMin = 10_000, rMax = 20_000;
+            int pMin = -50, pMax = -50;
+            int qMin = -40, qMax = -40;
+            int rMin = -200, rMax = 200;
 
 
             for (int p = pMin; p <= pMax; p++)
