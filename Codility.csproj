@@ -56,6 +56,7 @@
     <Compile Include="MaxProductOfThree.cs" />
     <Compile Include="MinAvgTwoSlice.cs" />
     <Compile Include="MissingInteger.cs" />
+    <Compile Include="NumberOfDiscIntersections.cs" />
     <Compile Include="OddOccurrencesInArray.cs" />
     <Compile Include="PassingCars.cs" />
     <Compile Include="PermCheck.cs" />
