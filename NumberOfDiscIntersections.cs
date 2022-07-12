@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Codility
@@ -8,39 +10,41 @@ namespace Codility
     {
         public NumberOfDiscIntersections()
         {
-            solution(new int[] { 1, 5, 2, 1, 4, 0 });
+            //solution(new int[] { 1, 2147483647, 0 }); //; 2
+            //solution(new int[] { 1, 5, 2, 1, 4, 0 }); //; 11
+            solution(new int[] { 1, 1, 1 }); //; 3
         }
 
         public int solution(int[] A)
         {
-            var data = new Dictionary<int, HashSet<int>>();
-            var hsResults = new HashSet<Tuple<int, int>>();
+            var ranges = new Dictionary<long, Tuple<long, long>>();
 
-            for (int posX = 0; posX < A.Length; posX++)
+            for (long posX = 0; posX < A.Length; posX++)
             {
-                var radius = A[posX];
-                for (int i = posX - radius; i <= posX + radius; i++)
-                {
-                    if (!data.ContainsKey(i))
-                    {
-                        var hs = new HashSet<int>();
-                        hs.Add(posX);
-                        data.Add(i, hs);
+                long radius = A[posX];
+                var range = Tuple.Create(posX - radius, posX + radius);
+                ranges.Add(posX, range);
+            }
 
-                    }
-                    else
+            int count = 0;
+            for (int i = 0; i < A.Length - 1; i++)
+            {
+                var iRange = ranges[i];
+                for (int j = i + 1; j < A.Length; j++)
+                {
+                    var jRange = ranges[j];
+                    var overlap = iRange.Item1 <= jRange.Item2 && jRange.Item1 <= iRange.Item2;
+                    if (overlap)
                     {
-                        var di = data[i];
-                        foreach (var prevX in di)
-                        {
-                            var tpl = Tuple.Create(posX, prevX);
-                            hsResults.Add(tpl);
-                        }
-                        di.Add(posX);
+                        count++;
                     }
+
                 }
             }
-            return hsResults.Count;
+            return count;
         }
     }
+
+
+
 }
