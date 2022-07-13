@@ -20,51 +20,37 @@ namespace Codility
                 return 0;
 
             var stack = new Stack<char>();
+            var dct = new Dictionary<char, char>();
+            dct.Add('(', ')');
+            dct.Add('{', '}');
+            dct.Add('[', ']');
+            dct.Add(')', '(');
+            dct.Add('}', '{');
+            dct.Add(']', '[');
 
-            bool isOpeningBracket = false;
-            char oppositeChar = ' ';
             foreach (char c in S)
             {
-                isOpeningBracket = false;
                 switch (c)
                 {
                     case '{':
                     case '[':
                     case '(':
-                        isOpeningBracket = true;
-                        break;
-                    case '}':
-                        oppositeChar = '{';
-                        break;
-                    case ']':
-                        oppositeChar = '[';
-                        break;
-                    case ')':
-                        oppositeChar = '(';
-                        break;
+                        stack.Push(c);
+                        continue;
                 }
 
-                if (isOpeningBracket)
-                    stack.Push(c);
+                // closing brackets
+                if (stack.Count == 0)
+                    return 0; // closing bracket to empty stack
+
+                var lastChar = stack.Peek();
+                if (lastChar == dct[c])
+                    stack.Pop(); // remove unnecessary pair
                 else
                 {
-                    // closing brackets
-                    if (stack.Count == 0)
-                    {
-                        return 0; // closing bracket to empty stack
-                    }
-
-                    var lastChar = stack.Peek();
-                    if (lastChar == oppositeChar)
-                    {
-                        stack.Pop(); // remove unnecessary pair
-                    }
-                    else
-                    {
-                        // end if prev bracket is opening
-                        if( lastChar == '[' || lastChar == '{' || lastChar == '(')
-                            return 0;
-                    }
+                    // end if prev bracket is opening
+                    if (lastChar == '[' || lastChar == '{' || lastChar == '(')
+                        return 0;
                 }
             }
             return stack.Count == 0 ? 1 : 0;
