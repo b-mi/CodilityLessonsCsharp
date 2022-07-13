@@ -24,7 +24,7 @@ namespace Codility
                 lstData.Add(Tuple.Create(i - radius, true));
                 lstData.Add(Tuple.Create(i + radius, false));
             }
-            var data = lstData.OrderBy(i => i.Item1).ThenByDescending(i => i.Item2).ToArray();
+            var data = lstData.OrderBy(i => i.Item1).ThenByDescending(i => i.Item2).ToArray(); // sort by X position and disk start
 
             long count = 0;
             var level = -1;
