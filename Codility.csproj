@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryGap.cs" />
+    <Compile Include="Brackets.cs" />
     <Compile Include="CountDiv.cs" />
     <Compile Include="CyclicRotation.cs" />
     <Compile Include="Distinct.cs" />
