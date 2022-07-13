@@ -10,37 +10,47 @@ namespace Codility
     {
         public NumberOfDiscIntersections()
         {
-            //solution(new int[] { 1, 2147483647, 0 }); //; 2
+            solution(new int[] { 1, 2147483647, 0 }); //; 2
             //solution(new int[] { 1, 5, 2, 1, 4, 0 }); //; 11
-            solution(new int[] { 1, 1, 1 }); //; 3
+            //solution(new int[] { 1, 1, 1 }); //; 3
         }
 
         public int solution(int[] A)
         {
-            var ranges = new Dictionary<long, Tuple<long, long>>();
+            var lstRanges = new List<Tuple<long, long>>();
 
             for (long posX = 0; posX < A.Length; posX++)
             {
                 long radius = A[posX];
                 var range = Tuple.Create(posX - radius, posX + radius);
-                ranges.Add(posX, range);
+                lstRanges.Add(range);
             }
-
             int count = 0;
-            for (int i = 0; i < A.Length - 1; i++)
-            {
-                var iRange = ranges[i];
-                for (int j = i + 1; j < A.Length; j++)
-                {
-                    var jRange = ranges[j];
-                    var overlap = iRange.Item1 <= jRange.Item2 && jRange.Item1 <= iRange.Item2;
-                    if (overlap)
-                    {
-                        count++;
-                    }
+            var ranges = lstRanges.OrderBy(i => i.Item1).ThenBy(i => i.Item2).ToArray();
 
-                }
+            var lstData = new List<Tuple<long, bool>>();
+            foreach (var item in lstRanges)
+            {
+                lstData.Add(Tuple.Create(item.Item1, true));
+                lstData.Add(Tuple.Create(item.Item2, false));
             }
+            var data = lstData.OrderBy(i => i.Item1).ThenByDescending(i => i.Item2).ToArray();
+
+            var level = -1;
+            foreach (var item in data)
+            {
+                if (item.Item2) // disk starts
+                {
+                    level++;
+                    count += level;
+                }
+                else
+                    level--;
+                Debug.WriteLine($"{level}, {item.Item1}, {item.Item2}");
+
+            }
+            Debug.WriteLine($"count: {count}");
+
             return count;
         }
     }
