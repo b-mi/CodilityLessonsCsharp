@@ -1,53 +1,73 @@
-﻿namespace Codility
+﻿using System;
+using System.Collections.Generic;
+
+namespace Codility
 {
     internal class Brackets
     {
         public Brackets()
         {
-            solution("([)()]");
-            //solution("{[()()]}");
+            Console.WriteLine(solution("(]").ToString());
+            Console.WriteLine(solution("{}([)()]").ToString());
+            Console.WriteLine(solution("{[()()]}").ToString());
         }
 
         public int solution(string S)
         {
-            int curlBrackets = 0;
-            int sqrBrackets = 0;
-            int rndBrackets = 0;
+            if (S.Length == 0)
+                return 1;
+            if (S[0] == ']' || S[0] == '}' || S[0] == ')')
+                return 0;
 
+            var stack = new Stack<char>();
+
+            bool isOpeningBracket = false;
+            char oppositeChar = ' ';
             foreach (char c in S)
             {
+                isOpeningBracket = false;
                 switch (c)
                 {
                     case '{':
-                        curlBrackets++;
+                    case '[':
+                    case '(':
+                        isOpeningBracket = true;
                         break;
                     case '}':
-                        curlBrackets--;
-                        if (curlBrackets < 0)
-                            return 0;
-                        break;
-                    case '[':
-                        sqrBrackets++;
+                        oppositeChar = '{';
                         break;
                     case ']':
-                        sqrBrackets--;
-                        if (sqrBrackets < 0)
-                            return 0;
-                        break;
-                    case '(':
-                        rndBrackets++;
+                        oppositeChar = '[';
                         break;
                     case ')':
-                        rndBrackets--;
-                        if (rndBrackets < 0)
-                            return 0;
-
-                        break;
-                    default:
+                        oppositeChar = '(';
                         break;
                 }
+
+                if (isOpeningBracket)
+                    stack.Push(c);
+                else
+                {
+                    // closing brackets
+                    if (stack.Count == 0)
+                    {
+                        return 0; // closing bracket to empty stack
+                    }
+
+                    var lastChar = stack.Peek();
+                    if (lastChar == oppositeChar)
+                    {
+                        stack.Pop(); // remove unnecessary pair
+                    }
+                    else
+                    {
+                        // end if prev bracket is opening
+                        if( lastChar == '[' || lastChar == '{' || lastChar == '(')
+                            return 0;
+                    }
+                }
             }
-            return 0;
+            return stack.Count == 0 ? 1 : 0;
         }
     }
 }
