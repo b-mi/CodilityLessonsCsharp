@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new Brackets();
+            new Fish();
+            //new Brackets();
             //new NumberOfDiscIntersections();
             //new Triangle();
             //new MaxProductOfThree();
