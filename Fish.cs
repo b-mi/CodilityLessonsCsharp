@@ -8,12 +8,12 @@ namespace Codility
     {
         public Fish()
         {
-            //solution(new int[] { 1 }, new int[] { 0 });
-            solution(new int[] { 0, 1 }, new int[] { 1, 1 });
-            //solution(new int[] { 4, 3, 2, 1, 5 }, new int[] { 0, 1, 0, 0, 0 });
+            solution(new int[] { 1 }, new int[] { 0 }); // 1
+            //solution(new int[] { 0, 1 }, new int[] { 1, 1 }); // 2
+            //solution(new int[] { 4, 3, 2, 1, 5 }, new int[] { 0, 1, 0, 0, 0 }); // 2
 
             var q = new Queue<int>();
-            
+
 
         }
 
@@ -33,46 +33,51 @@ namespace Codility
             for (int i = 0; i < A.Length; i++)
                 lst.Add(new Tuple<int, int>(A[i], B[i]));
 
-            Tuple<int, int> fishDown;
-            int idx = 0;
-            var lstToDelete = new List<Tuple<int, int>>();
-            while (idx < A.Length && lst[idx].Item2 != 1) idx++; // first downFish
-            if (idx < A.Length)
-            {
-                fishDown = lst[idx];
-                while (idx < A.Length && lst[idx].Item2 == 1)
-                {
-                    if (lst[idx].Item1 > fishDown.Item1)
-                        fishDown = lst[idx]; // find biggest fish
-                    idx++;
-                }
+            var stackDownFishes = new Stack<Tuple<int, int>>();
+            int survivedUpFishCount = 0;
 
-                while (fishDown != null && idx < A.Length)
+            Tuple<int, int> eatingFish = null;
+            for (int i = 0; i < lst.Count; i++)
+            {
+                var fish = lst[i];
+                if (fish.Item2 == 0) // fish up
                 {
-                    var fish = lst[idx];
-                    if (fish.Item2 == 0) // fish to eat
+                    if (eatingFish == null)
+                        survivedUpFishCount++; //add live fish
+                    else
                     {
-                        if (fishDown.Item1 > fish.Item1)
+                        if (eatingFish.Item1 > fish.Item1) // eatingFish is bigger so eat upstream fish
                         {
-                            lstToDelete.Add(fish);
+                            // fish was eaten, no add to count
                         }
                         else
                         {
-                            lstToDelete.Add(fishDown);
-                            fishDown = null;
+                            // eating fish was eaten
+                            if (stackDownFishes.Count > 0)
+                            {
+                                eatingFish = stackDownFishes.Pop(); // new eating fish
+                                i--; // restart
+                                continue;
+                            }
+                            else
+                            {
+                                eatingFish = null; // no eating fish
+                                survivedUpFishCount++;
+                            }
                         }
                     }
-                    else
-                    {
-                        // fish in the same direction
-                        if (fish.Item1 > fishDown.Item1)
-                            fishDown = fish;
-                    }
-                    idx++;
                 }
-
+                else
+                {
+                    //fish down
+                    if (eatingFish != null)
+                        stackDownFishes.Push(eatingFish);
+                    eatingFish = fish;
+                }
             }
-            return A.Length - lstToDelete.Count;
+
+
+            return survivedUpFishCount + stackDownFishes.Count + (eatingFish == null ? 0 : 1);
         }
     }
 }
