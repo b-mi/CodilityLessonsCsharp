@@ -11,21 +11,7 @@ namespace Codility
             solution(new int[] { 1 }, new int[] { 0 }); // 1
             //solution(new int[] { 0, 1 }, new int[] { 1, 1 }); // 2
             //solution(new int[] { 4, 3, 2, 1, 5 }, new int[] { 0, 1, 0, 0, 0 }); // 2
-
-            var q = new Queue<int>();
-
-
         }
-
-        /*
-          A[0] = 4    B[0] = 0
-          A[1] = 3    B[1] = 1
-          A[2] = 2    B[2] = 0
-          A[3] = 1    B[3] = 0
-          A[4] = 5    B[4] = 0 
-
-            1 - down, 0 up
-         */
 
         public int solution(int[] A, int[] B)
         {
