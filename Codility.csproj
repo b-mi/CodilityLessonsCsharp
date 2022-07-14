@@ -66,6 +66,7 @@
     <Compile Include="PermMissingElements.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoneWall.cs" />
     <Compile Include="TapeEquilibrium.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Triangle.cs" />

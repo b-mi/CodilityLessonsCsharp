@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new Nesting();
+            new StoneWall();
+            //new Nesting();
             //new Fish();
             //new Brackets();
             //new NumberOfDiscIntersections();
