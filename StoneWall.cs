@@ -11,14 +11,14 @@ namespace Codility
 
         public int solution(int[] H)
         {
-            if( H.Length == 1)
+            if (H.Length == 1)
             {
                 return 1;
             }
             var stack = new Stack<int>();
             int blocksCount = 1;
-            stack.Push(H[0]);
             var peekHeight = H[0];
+            stack.Push(peekHeight);
             for (int i = 1; i < H.Length; i++)
             {
                 var newHeight = H[i];
@@ -44,7 +44,6 @@ namespace Codility
                 }
                 else
                 {
-                    // newHeight > peekHeight
                     stack.Push(newHeight - peekHeight);
                     peekHeight = newHeight;
                     blocksCount++;
