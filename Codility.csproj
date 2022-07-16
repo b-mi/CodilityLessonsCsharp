@@ -59,6 +59,7 @@
     <Compile Include="MaxCounter.cs" />
     <Compile Include="MaxProductOfThree.cs" />
     <Compile Include="MaxProfit.cs" />
+    <Compile Include="MaxSliceSum.cs" />
     <Compile Include="MinAvgTwoSlice.cs" />
     <Compile Include="MissingInteger.cs" />
     <Compile Include="Nesting.cs" />
