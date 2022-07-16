@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new Dominator();
+            new EquiLeader();
+            //new Dominator();
             //new StoneWall();
             //new Nesting();
             //new Fish();

@@ -51,6 +51,7 @@
     <Compile Include="CyclicRotation.cs" />
     <Compile Include="Distinct.cs" />
     <Compile Include="Dominator.cs" />
+    <Compile Include="EquiLeader.cs" />
     <Compile Include="Fish.cs" />
     <Compile Include="FrogJmp.cs" />
     <Compile Include="FrogRiverOne.cs" />
