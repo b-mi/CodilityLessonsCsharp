@@ -10,7 +10,8 @@ namespace Codility
     {
         static void Main(string[] args)
         {
-            new MaxSliceSum();
+            new MaxDoubleSliceSum();
+            //new MaxSliceSum();
             //new MaxProfit();
             //new EquiLeader();
             //new Dominator();

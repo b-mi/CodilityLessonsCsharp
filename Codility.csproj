@@ -57,6 +57,7 @@
     <Compile Include="FrogRiverOne.cs" />
     <Compile Include="GenomicRangeQuery.cs" />
     <Compile Include="MaxCounter.cs" />
+    <Compile Include="MaxDoubleSliceSum.cs" />
     <Compile Include="MaxProductOfThree.cs" />
     <Compile Include="MaxProfit.cs" />
     <Compile Include="MaxSliceSum.cs" />
