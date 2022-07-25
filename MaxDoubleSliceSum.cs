@@ -18,14 +18,16 @@ namespace Codility
             //test(50, -1, 1);
 
 
-            solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -10 });
-            solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
-            solution(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
-            solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
-            solution(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
-            solution(new int[] { -1, -2, -3, -4, -5 }); // vsetko zaporne je max 0
-            solution(new int[] { 10, 1, 0, 1, 10 }); // 
-            solution(new int[] { 10, -2, 1, -3, 2, 10 }); // 1-3-5
+
+            //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
+            solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -12, - 7, -10 });
+            //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
+            //solution(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
+            //solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
+            //solution(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
+            //solution(new int[] { -1, -2, -3, -4, -5 }); // vsetko zaporne je max 0
+            //solution(new int[] { 10, 1, 0, 1, 10 }); // 
+            //solution(new int[] { 10, -2, 1, -3, 2, 10 }); // 1-3-5
 
 
 
@@ -50,10 +52,13 @@ namespace Codility
             {
                 var bn = brute(A, out int xn, out int yn, out int zn);
                 var rtn = c.Sum() - c.Min();
+                Debug.WriteLine($"Brute: max: {bn}, max sol: {rtn}, arr: {string.Join(",", A)}");
+
                 return rtn;
             }
             if (!hasPositives)
             {
+                Debug.WriteLine($"negatives: 0, arr: {string.Join(",", A)}");
                 return 0;
             }
 
@@ -101,8 +106,16 @@ namespace Codility
 
             var bruteRtn = brute(b, out int xR, out int yR, out int zR);
 
+            //var bruteRtn = 48;
+            //int xR = 6, yR = 13, zR = 19;
+
+
+            //var bruteRtn = 14;
+            //int xR = 119, yR = 126, zR = 184;
+
             int maxSum = int.MinValue;
-            int sum = 0, x = 0, y = 1, z = 2, bestZ = 0, bestY = 0;
+            int sum = 0, x = 0, y = 1, z = 2, bestX = 0, bestY = 0, bestZ = 0;
+
             // finding best z
             while (z < b.Length - 1)
             {
@@ -129,7 +142,7 @@ namespace Codility
                     //Debug.WriteLine($"BestY: {y}, max: {maxSum}");
                 }
             }
-            Debug.WriteLine($"Brute: x: {xR}, y: {yR}, z: {zR}, max: {bruteRtn}, bestY: {bestY}, bestZ: {bestZ}, max: {maxSum}");
+            Debug.WriteLine($"RES: {(bruteRtn == maxSum ? "OK" : "BAD")}, Z: {(zR == bestZ ? "OK" : "BAD")}, Brute: x: {xR}, y: {yR}, z: {zR}, max: {bruteRtn}, bestY: {bestY}, bestZ: {bestZ}, max: {maxSum}, arr: {string.Join(",", A)}");
 
             return maxSum;
         }
@@ -239,6 +252,7 @@ namespace Codility
         private int test(int N, int MIN, int MAX)
         {
             var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst); // 14
+            var aa = solution(lst);
             //var lstReduced = reduceLst(lst).ToArray();
             //var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);
             return rtn;
