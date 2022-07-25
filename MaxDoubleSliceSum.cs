@@ -17,9 +17,19 @@ namespace Codility
             //test(20, -10, 10);
             //test(50, -1, 1);
 
-            test2(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -10 });
-            //test2(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
 
+            solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -10 });
+            solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
+            solution(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
+            solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
+            solution(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
+            solution(new int[] { -1, -2, -3, -4, -5 }); // vsetko zaporne je max 0
+            solution(new int[] { 10, 1, 0, 1, 10 }); // 
+            solution(new int[] { 10, -2, 1, -3, 2, 10 }); // 1-3-5
+
+
+
+            //Debug.Assert(solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -10 }) == 48);
             //Debug.Assert(solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 }) == 7);
             //Debug.Assert(solution(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 }) == 17);
             //Debug.Assert(solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 }) == 34);
@@ -31,96 +41,95 @@ namespace Codility
 
         }
 
-        private int test(int N, int MIN, int MAX)
-        {
-            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst, out var sLst); // 14
-            var lstReduced = reduceLst(lst).ToArray();
-            var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);
-            return rtn;
-        }
-
-        private int test2(int[] A)
-        {
-            var rtn = brute(A, out var x, out var y, out var z, out string s1);
-            var reducedList = reduceLst(A);
-            var rtnR = brute(reducedList, out var xr, out var yr, out var zr, out string s2);
-            if (rtn != rtnR)
-            {
-                throw new NotImplementedException();
-            }
-            return rtn;
-        }
-
         public int solution(int[] A)
         {
-            var a = A.Skip(1).Take(A.Length - 2).ToArray();
-            var hasPositives = a.Any(i => i > 0);
-            var hasNegatives = a.Any(i => i < 0);
+            var c = A.Skip(1).Take(A.Length - 2).ToArray();
+            var hasPositives = c.Any(i => i > 0);
+            var hasNegatives = c.Any(i => i < 0);
             if (!hasNegatives)
-                return a.Sum() - a.Min();
+            {
+                var bn = brute(A, out int xn, out int yn, out int zn);
+                var rtn = c.Sum() - c.Min();
+                return rtn;
+            }
             if (!hasPositives)
+            {
                 return 0;
-
-            // reduction
-            var bLst = new List<int>();
-
-            int idx = 0;
-            int sumR = 0;
-            bool hasPos = false;
-            while (idx < a.Length)
-            {
-                var value = a[idx++];
-                if (value < 0)
-                {
-                    if (hasPos) // add positives sum
-                    {
-                        bLst.Add(sumR);
-                        sumR = 0;
-                        hasPos = false;
-                    }
-
-                    bLst.Add(value);
-                }
-                else
-                {
-                    sumR += value;
-                    hasPos = true;
-                }
-
-            }
-            if (hasPos)
-                bLst.Add(sumR);
-
-
-            // debug
-            if (a.Sum() != bLst.Sum())
-            {
-                throw new NotImplementedException();
             }
 
-            //b = a.ToList();
+            #region reduction, result in b
+            //var lstR = new List<int>();
+
+            //lstR.Add(0);
+            //int idx = 0;
+            //int sumR = 0;
+            //bool hasPos = false;
+            //while (idx < c.Length)
+            //{
+            //    var value = c[idx++];
+            //    if (value < 0)
+            //    {
+            //        if (hasPos) // add positives sum
+            //        {
+            //            lstR.Add(sumR);
+            //            sumR = 0;
+            //            hasPos = false;
+            //        }
+
+            //        lstR.Add(value);
+            //    }
+            //    else
+            //    {
+            //        sumR += value;
+            //        hasPos = true;
+            //    }
+
+            //}
+            //if (hasPos)
+            //    lstR.Add(sumR);
+            //lstR.Add(0);
+
+            //if (c.Sum() != lstR.Sum())
+            //{
+            //    throw new NotImplementedException();
+            //}
+
+            //var b = lstR.ToArray();
+            #endregion
+
+            var b = A;
+
+            var bruteRtn = brute(b, out int xR, out int yR, out int zR);
 
             int maxSum = int.MinValue;
-            int sum = 0;
-            // finding max
-            int start = 0, stop = 0;
-            for (int i = 0; i < a.Length; i += 2)
+            int sum = 0, x = 0, y = 1, z = 2, bestZ = 0, bestY = 0;
+            // finding best z
+            while (z < b.Length - 1)
             {
-                sum = a[i];
-                for (int j = i + 1; j < a.Length; j += 2)
+                sum += b[z];
+                z++;
+                if (sum > maxSum)
                 {
-                    var v2 = a[j] + a[j + 1];
-                    sum += v2;
-                    if (v2 > 0)
-                    {
-                        if (sum > maxSum)
-                        {
-                            maxSum = Math.Max(sum, maxSum);
-                            start = i; stop = j + 1;
-                        }
-                    }
+                    maxSum = Math.Max(maxSum, sum);
+                    bestZ = z;
+                    //Debug.WriteLine($"BestZ: {z}, max: {maxSum}");
                 }
             }
+
+            // finding best y
+            sum = maxSum;
+            while (y < bestZ - 1)
+            {
+                sum += b[y] - b[y + 1];
+                y++;
+                if (sum > maxSum)
+                {
+                    maxSum = Math.Max(maxSum, sum);
+                    bestY = y;
+                    //Debug.WriteLine($"BestY: {y}, max: {maxSum}");
+                }
+            }
+            Debug.WriteLine($"Brute: x: {xR}, y: {yR}, z: {zR}, max: {bruteRtn}, bestY: {bestY}, bestZ: {bestZ}, max: {maxSum}");
 
             return maxSum;
         }
@@ -144,37 +153,37 @@ namespace Codility
             }
         }
 
-        private int[] reduceLst(int[] lst)
-        {
-            var lst2 = new List<int>();
-            lst2.Add(lst.First());
-            var sign = Math.Sign(lst[1]);
-            int i = 1;
-            int sum = 0;
-            while (i < lst.Length - 1)
-            {
-                while (i < lst.Length - 1 && lst[i] < 0)
-                    lst2.Add(lst[i++]);
+        //private int[] reduceLst(int[] lst)
+        //{
+        //    var lst2 = new List<int>();
+        //    lst2.Add(lst.First());
+        //    var sign = Math.Sign(lst[1]);
+        //    int i = 1;
+        //    int sum = 0;
+        //    while (i < lst.Length - 1)
+        //    {
+        //        while (i < lst.Length - 1 && lst[i] < 0)
+        //            lst2.Add(lst[i++]);
 
-                sum = 0;
-                while (i < lst.Length - 1 && lst[i] >= 0)
-                    sum += lst[i++];
-                lst2.Add(sum);
-            }
+        //        sum = 0;
+        //        while (i < lst.Length - 1 && lst[i] >= 0)
+        //            sum += lst[i++];
+        //        lst2.Add(sum);
+        //    }
 
-            lst2.Add(lst.Last());
-            var sum1 = lst.Sum();
-            var sum2 = lst2.Sum();
-            if (sum1 != sum2)
-            {
-                throw new AggregateException();
-            }
+        //    lst2.Add(lst.Last());
+        //    var sum1 = lst.Sum();
+        //    var sum2 = lst2.Sum();
+        //    if (sum1 != sum2)
+        //    {
+        //        throw new AggregateException();
+        //    }
 
 
-            return lst2.ToArray();
-        }
+        //    return lst2.ToArray();
+        //}
 
-        private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst, out string sLst)
+        private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst)
         {
             var lstx = new List<int>();
 
@@ -182,17 +191,17 @@ namespace Codility
             {
                 lstx.Add(rnd.Next(MIN, MAX + 1));
             }
-            var bres = brute(lstx.ToArray(), out X, out Y, out Z, out sLst);
+            var bres = brute(lstx.ToArray(), out X, out Y, out Z);
             lst = lstx.ToArray();
             return bres;
         }
 
 
-        private int brute(int[] ints, out int X, out int Y, out int Z, out string sLst)
+        private int brute(int[] ints, out int X, out int Y, out int Z)
         {
             int max = int.MinValue;
             X = Y = Z = 0;
-            sLst = String.Join(", ", ints);
+            //sLst = String.Join(", ", ints);
             for (int i = 0; i < ints.Length - 2; i++)
             {
                 for (int j = i + 1; j < ints.Length - 1; j++)
@@ -222,9 +231,29 @@ namespace Codility
                     }
                 }
             }
-            sLst = $"Debug.Assert(solution(new int[] {{ {sLst} }}) == {max});";
+            //sLst = $"Debug.Assert(solution(new int[] {{ {sLst} }}) == {max});";
 
             return max;
+        }
+
+        private int test(int N, int MIN, int MAX)
+        {
+            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst); // 14
+            //var lstReduced = reduceLst(lst).ToArray();
+            //var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);
+            return rtn;
+        }
+
+        private int test2(int[] A)
+        {
+            var rtn = brute(A, out var x, out var y, out var z);
+            //var reducedList = reduceLst(A);
+            //var rtnR = brute(reducedList, out var xr, out var yr, out var zr, out string s2);
+            //if (rtn != rtnR)
+            //{
+            //    throw new NotImplementedException();
+            //}
+            return rtn;
         }
 
     }
