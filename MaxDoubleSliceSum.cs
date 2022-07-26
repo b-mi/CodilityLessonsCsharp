@@ -5,10 +5,8 @@ using System.Linq;
 
 namespace Codility
 {
-    internal class MaxDoubleSliceSum
+    internal partial class MaxDoubleSliceSum
     {
-        Random rnd;
-
         public MaxDoubleSliceSum()
         {
             rnd = new Random(7);
@@ -20,7 +18,12 @@ namespace Codility
             //solution(new int[] { 3, -50, -50, 100, 2, -50, -50, 2, -3, 4, -5, 6, 2 });
             //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
             //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 100, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
-            solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -12, -7, -10 });
+            //solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -12, -7, -10 });
+            solution(new int[] { -1, -1, -1, -1, -1, 1 , -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1 });
+
+            //solution(new int[] { -2, -2, -2, 3, 4, 5, -10, 3, 4, 5, -100, -100, -2, -2, 3, 4, 6, -10, 3, 4, 5, -1, -1, 1 });
+
+
             //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
             //solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
             //solution(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
@@ -41,6 +44,7 @@ namespace Codility
 
 
         }
+
 
         public int solution(int[] A)
         {
@@ -112,10 +116,11 @@ namespace Codility
             //var bruteRtn = 14;
             //int xR = 119, yR = 126, zR = 184;
 
-            int sum = 0, sum2 = 0, x = 0, y = 1, z = 2, bestPoint = 0;
+            int sum = 0, sum2 = 0, x = 0, y = 1, z = 2, maxPoint = 0, minPoint = 0, summin = 0, summin2 = 0;
 
             sum2 = A.Sum() - A[0] - A[1] - A[A.Length - 1];
             int maxSum = int.MinValue;
+            int minSum = int.MaxValue;
 
 
             while (y < b.Length - 2)
@@ -126,15 +131,28 @@ namespace Codility
                 if (sum > maxSum)
                 {
                     maxSum = sum;
-                    bestPoint = y;
-                    Debug.WriteLine($"1: y: {y}, sum: {sum}, sum2 {sum2},");
+                    maxPoint = y;
+                    Debug.WriteLine($"U: y: {y}, sum: {sum}, sum2 {sum2},");
                 }
+                if (summin < minSum)
+                {
+                    minSum = summin;
+                    minPoint = y;
+                    Debug.WriteLine($"Umin: y: {y}, summin: {summin}, summin2 {summin2},");
+                }
+
                 sum2 -= b[y];
                 if (sum2 > maxSum)
                 {
                     maxSum = sum2;
-                    bestPoint = y;
-                    Debug.WriteLine($"2: y: {y}, sum: {sum}, sum2 {sum2},");
+                    maxPoint = y;
+                    Debug.WriteLine($"D: y: {y}, sum: {sum}, sum2 {sum2},");
+                }
+                if (summin2 < minSum)
+                {
+                    minSum = summin2;
+                    minPoint = y;
+                    Debug.WriteLine($"Dmin: y: {y}, summmin: {summin}, summmin2 {summin2},");
                 }
             }
 
@@ -143,7 +161,7 @@ namespace Codility
             // 
             sum = 0;
             var maxR = int.MinValue;
-            for (int idx = bestPoint + 1; idx < A.Length - 1; idx++)
+            for (int idx = maxPoint + 1; idx < A.Length - 1; idx++)
             {
                 sum += A[idx];
                 if (sum > maxR)
@@ -152,7 +170,7 @@ namespace Codility
 
             sum = 0;
             int maxL = int.MinValue;
-            for (int idx = bestPoint - 1; idx > 0; idx--)
+            for (int idx = maxPoint - 1; idx > 0; idx--)
             {
                 sum += A[idx];
                 if (sum > maxL)
@@ -169,7 +187,7 @@ namespace Codility
             }
             else
             {
-                Debug.WriteLine($"BAD {bruteRtn} != {maxSum}, bestPoint: {bestPoint}, BR: ({xR}-{yR}-{zR})");
+                Debug.WriteLine($"BAD {bruteRtn} != {maxSum}, bestPoint: {maxPoint}, BR: ({xR}-{yR}-{zR})");
                 Debug.WriteLine($"{string.Join(",", A)}");
 
             }
@@ -221,129 +239,5 @@ namespace Codility
 
             return maxSum;
         }
-
-        private void validate(string id, int[] a, int x, int y, int z, int sum, int maxSum, int tempMax)
-        {
-            var sum2 = 0;
-            for (int i = x + 1; i < y; i++)
-            {
-                sum2 += a[i];
-            }
-            for (int i = y + 1; i < z; i++)
-            {
-                sum2 += a[i];
-            }
-            Debug.WriteLine($"{id}) x: {x}, y: {y}, z:{z}, sum: {sum}, validSum: {sum2}, maxSum: {maxSum}, tempMax: {tempMax}");
-
-            if (sum != sum2)
-            {
-                throw new InvalidProgramException();
-            }
-        }
-
-        //private int[] reduceLst(int[] lst)
-        //{
-        //    var lst2 = new List<int>();
-        //    lst2.Add(lst.First());
-        //    var sign = Math.Sign(lst[1]);
-        //    int i = 1;
-        //    int sum = 0;
-        //    while (i < lst.Length - 1)
-        //    {
-        //        while (i < lst.Length - 1 && lst[i] < 0)
-        //            lst2.Add(lst[i++]);
-
-        //        sum = 0;
-        //        while (i < lst.Length - 1 && lst[i] >= 0)
-        //            sum += lst[i++];
-        //        lst2.Add(sum);
-        //    }
-
-        //    lst2.Add(lst.Last());
-        //    var sum1 = lst.Sum();
-        //    var sum2 = lst2.Sum();
-        //    if (sum1 != sum2)
-        //    {
-        //        throw new AggregateException();
-        //    }
-
-
-        //    return lst2.ToArray();
-        //}
-
-        private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst)
-        {
-            var lstx = new List<int>();
-
-            for (int i = 0; i < N; i++)
-            {
-                lstx.Add(rnd.Next(MIN, MAX + 1));
-            }
-            var bres = brute(lstx.ToArray(), out X, out Y, out Z);
-            lst = lstx.ToArray();
-            return bres;
-        }
-
-
-        private int brute(int[] ints, out int X, out int Y, out int Z)
-        {
-            int max = int.MinValue;
-            X = Y = Z = 0;
-            //sLst = String.Join(", ", ints);
-            for (int i = 0; i < ints.Length - 2; i++)
-            {
-                for (int j = i + 1; j < ints.Length - 1; j++)
-                {
-                    for (int k = j + 1; k < ints.Length - 0; k++)
-                    {
-                        var sum = 0;
-                        var x = i + 1;
-                        var txj = Tuple.Create(x, j);
-                        while (x < j)
-                            sum += ints[x++];
-
-                        x = j + 1;
-                        var txk = Tuple.Create(x, k);
-                        while (x < k)
-                            sum += ints[x++];
-
-                        if (sum > max)
-                        {
-                            max = sum;
-                            X = i;
-                            Y = j;
-                            Z = k;
-
-                        }
-                        //Console.WriteLine($"{i}, {j}, {k}");
-                    }
-                }
-            }
-            //sLst = $"Debug.Assert(solution(new int[] {{ {sLst} }}) == {max});";
-
-            return max;
-        }
-
-        private int test(int N, int MIN, int MAX)
-        {
-            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst); // 14
-            var aa = solution(lst);
-            //var lstReduced = reduceLst(lst).ToArray();
-            //var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);
-            return rtn;
-        }
-
-        private int test2(int[] A)
-        {
-            var rtn = brute(A, out var x, out var y, out var z);
-            //var reducedList = reduceLst(A);
-            //var rtnR = brute(reducedList, out var xr, out var yr, out var zr, out string s2);
-            //if (rtn != rtnR)
-            //{
-            //    throw new NotImplementedException();
-            //}
-            return rtn;
-        }
-
     }
 }
