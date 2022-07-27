@@ -235,7 +235,7 @@ namespace Codility
         //    return lst2.ToArray();
         //}
 
-        private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst)
+        private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst, bool useBrute)
         {
             var lstx = new List<int>();
 
@@ -243,9 +243,17 @@ namespace Codility
             {
                 lstx.Add(rnd.Next(MIN, MAX + 1));
             }
-            var bres = brute(lstx.ToArray(), out X, out Y, out Z);
             lst = lstx.ToArray();
-            return bres;
+            if (useBrute)
+            {
+                var bres = brute(lst, out X, out Y, out Z);
+                return bres;
+            }
+            else
+            {
+                X = Y = Z = 0;
+            }
+            return 0;
         }
 
 
@@ -290,7 +298,7 @@ namespace Codility
 
         private int test(int N, int MIN, int MAX)
         {
-            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst); // 14
+            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst, true); // 14
             var aa = solution(lst);
             //var lstReduced = reduceLst(lst).ToArray();
             //var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);

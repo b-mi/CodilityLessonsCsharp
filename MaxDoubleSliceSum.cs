@@ -7,11 +7,18 @@ namespace Codility
 {
     internal partial class MaxDoubleSliceSum
     {
+
+        bool useBrute = false;
         public MaxDoubleSliceSum()
         {
             rnd = new Random(7);
 
-            test(500, -1, 1);
+            int brute = 153;
+            genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
+            
+            var x = solution(lst);
+
+            //test(500, -1, 1);
             //test(20, -10, 10);
             //test(50, -1, 1);
 
@@ -62,7 +69,15 @@ namespace Codility
                 Debug.WriteLine($"negatives: 0, arr: {string.Join(",", A)}");
                 return 0;
             }
-            var bruteRtn = brute(A, out int xR, out int yR, out int zR);
+            int bruteRtn = 0, xR = 0, yR = 0, zR = 0;
+            if (useBrute)
+            {
+
+                bruteRtn = brute(A, out xR, out yR, out zR);
+            }
+            else
+            {
+            }
 
             // y value, Range 1, Length-1
             int maxSumTotal = 0;
