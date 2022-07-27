@@ -15,9 +15,14 @@ namespace Codility
 
             int brute = 153;
             genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
-            
-            var x = solution(lst);
+            var lst2 = reduceLst(lst);
+            var sw = new Stopwatch();
+            sw.Start();
+            var x = solution(lst2);
+            sw.Stop();
+            Debug.WriteLine($"col: {x}, brute: 153, time: {sw.ElapsedMilliseconds / 1000} sec.");
 
+            return;
             //test(500, -1, 1);
             //test(20, -10, 10);
             //test(50, -1, 1);
