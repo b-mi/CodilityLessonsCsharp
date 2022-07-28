@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace Codility
@@ -9,23 +10,39 @@ namespace Codility
     {
 
         bool useBrute = false;
+        bool useOptimiztion = true;
+        bool useReduction = true;
+        bool useLog = false;
+
+        string logFile;
+
         public MaxDoubleSliceSum()
         {
             rnd = new Random(7);
 
-            int brute = 153;
+            //int brute = 153;
             genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
-            var lst2 = reduceLst(lst);
-            var sw = new Stopwatch();
-            sw.Start();
-            var x = solution(lst2);
-            sw.Stop();
-            Debug.WriteLine($"col: {x}, brute: 153, time: {sw.ElapsedMilliseconds / 1000} sec.");
+            //genData(70, -10_000, 10_000, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
+
+            //useOptimiztion = false;
+            var x = solution(lst);
+
+            //useOptimiztion = true;
+            //x = solution(lst);
+
+            //Debug.WriteLine($"result: {x}, brute: 153, time: {sw.ElapsedMilliseconds / 1000} sec.");
+
 
             return;
+
             //test(500, -1, 1);
             //test(20, -10, 10);
             //test(50, -1, 1);
+
+            //sw = new Stopwatch();
+            //sw.Start();
+            //sw.Stop();
+            //var ela = sw.ElapsedMilliseconds;
 
             solution(new int[] { 3, -50, -50, 100, 2, -50, -50, 2, -3, 4, -5, 6, 2 });
             solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
@@ -58,6 +75,7 @@ namespace Codility
 
         public int solution(int[] A)
         {
+
             var c = A.Skip(1).Take(A.Length - 2).ToArray();
             var hasPositives = c.Any(i => i > 0);
             var hasNegatives = c.Any(i => i < 0);
@@ -74,6 +92,19 @@ namespace Codility
                 Debug.WriteLine($"negatives: 0, arr: {string.Join(",", A)}");
                 return 0;
             }
+
+            var aOrigLen = A.Length;
+            if (useReduction)
+            {
+                A = reduceLst(A);
+            }
+            if (useLog)
+            {
+                logFile = $"R{(useReduction ? 1 : 0)}_O{(useOptimiztion ? 1 : 0)}_OL{aOrigLen}_RL{A.Length}.txt";
+                if (File.Exists(logFile))
+                    File.Delete(logFile);
+            }
+
             int bruteRtn = 0, xR = 0, yR = 0, zR = 0;
             if (useBrute)
             {
@@ -84,58 +115,90 @@ namespace Codility
             {
             }
 
+            var sw = new Stopwatch();
+            sw.Start();
+
             // y value, Range 1, Length-1
             int maxSumTotal = 0;
 
-            // get max under y
+            int yLastToUp = A.Length - 2, yLastToDn = 1, sumUp, sumDn;
             for (int y = 1; y < A.Length - 2; y++)
             {
-                var sumUp = getMaxForY(A, y, 1);
-                var sumDn = getMaxForY(A, y, -1);
-                //Debug.WriteLine($"y: {y}, sumUp: {sumUp}, sumDn: {sumDn}");
+
+                if (useOptimiztion)
+                {
+                    yLastToUp = getMaxForY(A, y, 1, yLastToUp, out sumUp);
+                    yLastToDn = getMaxForY(A, y, -1, yLastToDn, out sumDn);
+                }
+                else
+                {
+                    getMaxForY(A, y, 1, yLastToUp, out sumUp);
+                    getMaxForY(A, y, -1, yLastToDn, out sumDn);
+                }
+                if (useLog)
+                {
+                    File.AppendAllText(logFile, $"y: {y}, UP: sum: {sumUp}, DN: sum: {sumDn}{Environment.NewLine}");
+                    //File.AppendAllText(logFile, $"y: {y}, UP: sum: {sumUp}, DN: sum: {sumDn}, toYUP: {yLastToUp}, toYDN: {yLastToDn}{Environment.NewLine}");
+                }
+                //Debug.WriteLine($"y: ({sumDn}) {yLastToDn} <= {y} =>  {yLastToUp} ({sumUp}), val: {A[y]}, total: {sumUp + sumDn}");
                 maxSumTotal = Math.Max(maxSumTotal, sumUp + sumDn);
             }
+            sw.Stop();
 
-
-            Debug.WriteLine($"Brute: {bruteRtn}, ({xR}-{yR}-{zR})");
-            Debug.WriteLine($"maxSumTotal: {maxSumTotal}");
-            Debug.WriteLine($"{string.Join(",", A)}");
-
-            Debug.WriteLine("---");
-
-
+            var msg = $"Brute: {bruteRtn}, ({xR}-{yR}-{zR}), maxSumTotal: {maxSumTotal}, Elapsed ms: {sw.ElapsedMilliseconds}";
+            if (useLog)
+                File.AppendAllText(logFile, msg + Environment.NewLine);
+            Debug.WriteLine(msg);
 
             return maxSumTotal;
         }
 
-        private static int getMaxForY(int[] A, int y, int direction)
+        private int getMaxForY(int[] A, int y, int direction, int yTo, out int max)
         {
-            int sum, max;
+            int sum, newYTo;
+            newYTo = yTo;
+
+            //if (y == 19 && direction == 1 && useOptimiztion)
+            //{
+
+            //}
+
+            sum = max = 0;
             if (direction == 1) // down
             {
-                sum = max = 0;
-                while (y < A.Length - 2)
+                if (yTo < y && direction == 1)
+                    yTo = A.Length - 2;
+                while (y < yTo)
                 {
                     y++;
                     sum += A[y];
                     if (sum > max)
+                    {
                         max = sum;
+                        newYTo = y;
+                    }
                 }
             }
             else
             {
-                sum = max = 0;
-                while (y > 1)
+                while (y > yTo)
                 {
                     y--;
                     sum += A[y];
                     if (sum > max)
+                    {
                         max = sum;
+                        newYTo = y;
+                    }
                 }
 
             }
 
-            return Math.Max(0, max);
+            max = Math.Max(0, max);
+
+
+
+            return newYTo;
         }
     }
 }
