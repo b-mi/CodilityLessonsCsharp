@@ -21,19 +21,19 @@ namespace Codility
             rnd = new Random(7);
 
             //int brute = 153;
-            genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
-            //genData(70, -10_000, 10_000, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
+            //genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
+            ////genData(70, -10_000, 10_000, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
 
-            useOptimization = false;
-            var x = solution(lst);
+            //useOptimization = false;
+            //var x = solution(lst);
 
-            useOptimization = true;
-            x = solution(lst);
+            //useOptimization = true;
+            //x = solution(lst);
 
-            //Debug.WriteLine($"result: {x}, brute: 153, time: {sw.ElapsedMilliseconds / 1000} sec.");
+            ////Debug.WriteLine($"result: {x}, brute: 153, time: {sw.ElapsedMilliseconds / 1000} sec.");
 
 
-            return;
+            //return;
 
             //test(500, -1, 1);
             //test(20, -10, 10);
@@ -138,12 +138,12 @@ namespace Codility
             // y value, Range 1, Length-1
             int maxSumTotal = 0;
 
-            int yLastToUp = A.Length - 2, yLastToDn = 1, sumUp = 0, sumDn = 0, y = 1, yStart = 0;
+            int yLastToUp = A.Length - 2, yLastToDn = 1, maxUp = 0, maxDn = 0, y = 1, yStart = 0, sumUp = 0, sumDn = 0;
             if (useOptimization)
             {
-                yLastToUp = getMaxForY(A, y, 1, yLastToUp, out sumUp);  // y sa prehladava smerom ku koncu (len - 2)
-                yLastToDn = getMaxForY(A, y, -1, yLastToDn, out sumDn); // y sa prehladava smerom k zaciatku (1)
-                addLog(A, yLastToUp, yLastToDn, sumUp, sumDn, y);
+                yLastToUp = getMaxForY(A, y, 1, yLastToUp, out maxUp, out sumUp);  // y sa prehladava smerom ku koncu (len - 2)
+                yLastToDn = getMaxForY(A, y, -1, yLastToDn, out maxDn, out sumDn); // y sa prehladava smerom k zaciatku (1)
+                addLog(A, yLastToUp, yLastToDn, maxUp, maxDn, y, sumUp, sumDn);
                 yStart = 2;
             }
             else
@@ -157,10 +157,10 @@ namespace Codility
                 {
                     if (y <= yLastToUp)
                     {
-                        sumUp -= A[y];
+                        maxUp -= A[y];
                     }
                     else
-                        yLastToUp = getMaxForY(A, y, 1, yLastToUp, out sumUp);  // y sa prehladava smerom ku koncu (len - 2)
+                        yLastToUp = getMaxForY(A, y, 1, yLastToUp, out maxUp, out sumUp);  // y sa prehladava smerom ku koncu (len - 2)
 
                     //if (y >= yLastToUp)
                     //{
@@ -169,16 +169,16 @@ namespace Codility
                     //    //    sumDn = 0;
                     //}
                     //else
-                        yLastToDn = getMaxForY(A, y, -1, yLastToDn, out sumDn); // y sa prehladava smerom k zaciatku (1)
+                        yLastToDn = getMaxForY(A, y, -1, yLastToDn, out maxDn, out sumDn); // y sa prehladava smerom k zaciatku (1)
                 }
                 else
                 {
-                    getMaxForY(A, y, 1, yLastToUp, out sumUp);
-                    getMaxForY(A, y, -1, yLastToDn, out sumDn);
+                    getMaxForY(A, y, 1, yLastToUp, out maxUp, out sumUp);
+                    getMaxForY(A, y, -1, yLastToDn, out maxDn, out sumDn);
                 }
-                addLog(A, yLastToUp, yLastToDn, sumUp, sumDn, y);
+                addLog(A, yLastToUp, yLastToDn, maxUp, maxDn, y, sumUp, sumDn);
                 //Debug.WriteLine($"y: ({sumDn}) {yLastToDn} <= {y} =>  {yLastToUp} ({sumUp}), val: {A[y]}, total: {sumUp + sumDn}");
-                maxSumTotal = Math.Max(maxSumTotal, sumUp + sumDn);
+                maxSumTotal = Math.Max(maxSumTotal, maxUp + maxDn);
             }
             sw.Stop();
 
@@ -190,19 +190,18 @@ namespace Codility
             return maxSumTotal;
         }
 
-        private void addLog(int[] A, int yLastToUp, int yLastToDn, int sumUp, int sumDn, int y)
+        private void addLog(int[] A, int yLastToUp, int yLastToDn, int maxUp, int maxDn, int y, int sumUp, int sumDn)
         {
             if (useLog)
             {
-                //var msgl = $"y: {y},\tA[y]: {A[y]},\tUP: sum: {sumUp},\tDN: sum: {sumDn},\ttot: {sumUp + sumDn}\t\t toYUP: {yLastToUp}, toYDN: {yLastToDn}{Environment.NewLine}";
-                var msgl = $"y: {y},\tA[y]: {A[y]},\tUP: sum: {sumUp},\tDN: sum: {sumDn},\ttot: {sumUp + sumDn}{Environment.NewLine}";
+                var msgl = $"y: {y},\tA[y]: {A[y],-5}, maxUP: {maxUp,-5}, sumUp: {sumUp,-5}, maxDN: {maxDn,-5}, sumDN: {sumDn,-5}, tot: {maxUp + maxDn,-5}, toYUP: {yLastToUp}, toYDN: {yLastToDn}{Environment.NewLine}";
                 File.AppendAllText(logFile, msgl);
             }
         }
 
-        private int getMaxForY(int[] A, int y, int direction, int yTo, out int max)
+        private int getMaxForY(int[] A, int y, int direction, int yTo, out int max, out int sum)
         {
-            int sum, newYTo;
+            int newYTo;
             newYTo = yTo;
 
             //if (y == 19 && direction == 1 && useOptimiztion)
