@@ -205,36 +205,6 @@ namespace Codility
         }
 
 
-        private int[] reduceLst(int[] lst)
-        {
-            var lst2 = new List<int>();
-            lst2.Add(lst.First());
-            var sign = Math.Sign(lst[1]);
-            int i = 1;
-            int sum = 0;
-            while (i < lst.Length - 1)
-            {
-                while (i < lst.Length - 1 && lst[i] < 0)
-                    lst2.Add(lst[i++]);
-
-                sum = 0;
-                while (i < lst.Length - 1 && lst[i] >= 0)
-                    sum += lst[i++];
-                lst2.Add(sum);
-            }
-
-            lst2.Add(lst.Last());
-            var sum1 = lst.Sum();
-            var sum2 = lst2.Sum();
-            if (sum1 != sum2)
-            {
-                throw new AggregateException();
-            }
-
-
-            return lst2.ToArray();
-        }
-
         private int genData(int N, int MIN, int MAX, out int X, out int Y, out int Z, out int[] lst, bool useBrute)
         {
             var lstx = new List<int>();
