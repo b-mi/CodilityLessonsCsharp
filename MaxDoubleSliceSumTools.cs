@@ -234,6 +234,7 @@ namespace Codility
             //sLst = String.Join(", ", ints);
             for (int i = 0; i < ints.Length - 2; i++)
             {
+                Debug.WriteLine($"{i}");
                 for (int j = i + 1; j < ints.Length - 1; j++)
                 {
                     for (int k = j + 1; k < ints.Length - 0; k++)
@@ -268,7 +269,7 @@ namespace Codility
 
         private int test(int N, int MIN, int MAX)
         {
-            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst, true); // 14
+            var rtn = genData(N, MIN, MAX, out var X, out var Y, out var Z, out var lst, false); // 14
             var aa = solution(lst);
             //var lstReduced = reduceLst(lst).ToArray();
             //var rtnRed = brute(lstReduced, out int XR, out int YR, out int ZR, out string str);

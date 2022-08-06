@@ -9,7 +9,6 @@ namespace Codility
     {
         public MaxSliceSum()
         {
-
             Debug.Assert(solution(new int[] { 3, -2, 3 }) == 4); // 4
             Debug.Assert(solution(new int[] { 3, 2, -6, 4, 0 }) == 5); // 5
             Debug.Assert(solution(new int[] { -7, -2, 3, 2, -6, 4, 3, 2, -1, 0, 7, -4, -5, 8, -13, 1, -5, -3, 8 }) == 15);
@@ -54,13 +53,17 @@ namespace Codility
             maxSum = Math.Max(newA.Max(), maxSum);
 
             // finding max
-            for (int i = 0; i < newA.Count - 0; i += 2)
+            for (int i = 0; i < newA.Count; i += 2)
             {
                 sum = newA[i];
-                for (int j = i + 1; j < newA.Count - 0; j += 2)
+                for (int j = i + 1; j < newA.Count; j += 2)
                 {
                     sum += newA[j] + newA[j + 1];
-                    maxSum = Math.Max(sum, maxSum);
+                    if (sum > maxSum)
+                    {
+                        maxSum = sum;
+                        Debug.WriteLine($"{i}, {j}, {maxSum}");
+                    }
                 }
             }
 
