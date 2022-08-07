@@ -11,9 +11,9 @@ namespace Codility
         private const int dirUnderY = 1;
         private const int dirAboveY = -1;
 
-        bool useBrute = false;
-        bool useOptimization = true;
-        bool useReduction = true;
+        bool useBrute = true;
+        bool useOptimization = false;
+        bool useReduction = false;
         bool useLog = false;
 
         string logFile;
@@ -23,11 +23,9 @@ namespace Codility
             rnd = new Random(7);
 
             //int brute = 153;
-            genData(1_500, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt brute = 24, sol2sec = 24, 579-581-622 (reduced pole)
+            //genData(1_500, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt brute = 24, sol2sec = 24, 579-581-622 (reduced pole)
 
             //genData(100_000, -1, 1, out int _, out int _, out int _, out var lst, false); // spravny vysledok by mal byt 153
-            //var sw = new Stopwatch();
-            //sw.Start();
             //var a = solutionMSS(lst);
             //sw.Stop();
             //var ela = sw.ElapsedMilliseconds;
@@ -42,13 +40,28 @@ namespace Codility
 
             //var xx = solution1sec(lst, null);
 
-            solution(lst);
-            //solution1sec(lst);
+            //var sw = new Stopwatch();
+            //sw.Start();
+            //solution3(lst);
+            //sw.Stop();
+            //Debug.WriteLine($"ELA: {sw.ElapsedMilliseconds}");
             //return;
 
             //test(500, -1, 1);
             //test(20, -10, 10);
             //test(50, -1, 1);
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    Debug.WriteLine($"---{i}---");
+            //    genData(7, -7, 7, out int _, out int _, out int _, out var lst, false);
+            //    if (!solution3(lst))
+            //    {
+
+            //    }
+
+            //}
+            //return;
 
             //sw = new Stopwatch();
             //sw.Start();
@@ -57,20 +70,30 @@ namespace Codility
 
             // [0, 10, -5, -2, 0] = correct = 10
 
-            //solution2(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
-            //solution2(new int[] { 0, 10, -5, -2, 0 });
-            //solution(new int[] { 3, -50, -50, 100, 2, -50, -50, 2, -3, 4, -5, 6, 2 });
-            //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
-            //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 100, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
-            solution(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -12, -7, -10 });
-            //solution(new int[] { -1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1 });
-            //solution(new int[] { -2, -2, -2, 3, 4, 5, -10, 3, 4, 5, -100, -100, -2, -2, 3, 4, 6, -10, 3, 4, 5, -1, -1, 1 });
-            //solution(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
-            //solution(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
-            //solution(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
-            //solution(new int[] { -1, -2, -3, -4, -5 }); // vsetko zaporne je max 0
-            //solution(new int[] { 10, 1, 0, 1, 10 }); // 
-            //solution(new int[] { 10, -2, 1, -3, 2, 10 }); // 1-3-5
+
+            solution3(new int[] { 6, 5, -4, 3, -7, 5, 6 });
+            //solution3(new int[] { 7, 0, -7, 5, -2, 2, 3 });
+            //solution3(new int[] { 5, 5, -1, -7, 6, 4, -2 });
+
+            //solution3(new int[] { -2, 6, 2, -7, -2, 3, -7 });
+            //solution3(new int[] { 7, -2, -1, 0, -2, -5, -6 });
+            //solution3(new int[] { 1, 2, 3, 4, 5 }); // 7, 0-1-4
+            //solution3(new int[] { 7, 0, 0, 0, 0, 0, -6 });
+            //solution3(new int[] { -3, -3, 1, 3, 2, 0, 2 });
+            //solution3(new int[] { 10, -2, 1, -3, 2, 10 }); // 1-3-5
+            //solution3(new int[] { 3, -1, 2, -1, 3, -3, 2 });
+            //solution3(new int[] { 3, 2, 6, -1, 4, 5, -1, 2 });
+            //solution3(new int[] { 0, 10, -5, -2, 0 });
+            //solution3(new int[] { 3, -50, -50, 100, 2, -50, -50, 2, -3, 4, -5, 6, 2 });
+            //solution3(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 }); // 14, 119-126-184
+            //solution3(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 100, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, -1, 1, 1, 1, 0, 1, 1, -1, 0, 0, 1, -1, 0, -1, -1, -1, 1, -1, -1, 1, 0, 0, 1, 1, -1, -1, 0, -1, 1, 0, -1, 0, -1, 0, 0, 1, 0, -1, 0, -1, 0, 0, 0, -1, -1, 1, -1, 1, 1, 0, -1, 0, 0, -1, 0, 0, -1, 1, 1, 0, 0, 0, -1, -1, -1, 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 1, -1, 0, 1, -1, 1, 0, -1, 0, -1, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 1, 0, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, -1, 0, 0, 1, 0, 1, 1, -1, 0, 0, 0, 1, 0, 1, -1, 0, 1, 0, 0, 1, 0, 1, -1, 1, -1, -1, 0, 1, -1, -1, 0, -1, 0, -1, 1, 1, 0, 1, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0, -1, -1, -1, -1, -1, 0, 1, -1, -1, 0, 1, -1, 0, -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, 0, -1, 0, -1, -1, 1, 1, 0, 1, 0, 0, 1, -1, -1, -1, 1, -1, 0, -1, 0, -1, -1, 1, -1, -1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, -1, 0, -1, 0, 0, 1, -1, 0, 0, -1, -1, 1, -1, -1, -1, -1, -1, -1, 0, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 0, 0, 0, -1, 0, -1, 0, 1, 1, 0, 1, 0, -1, 0, -1, -1, -1, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 1, -1, 0, -1, -1, -1, 1, 1, 1, 1, -1, 1, -1, 1, 0, -1, -1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, -1, 0, 1, -1, 1, 1, -1, 1, -1, 0, 0, -1, 1, -1, 0, 0, -1, 0, 0, 1, 0, -1, 1, 1, 1, -1, 1, 1, -1, 1, 0, 0, 1, 0, 0, -1, 1, -1, -1, -1, 1 });
+            //solution3(new int[] { -2, 8, 3, -9, -3, 4, -10, 10, 7, 7, -1, 9, -1, -8, 8, -2, 6, -3, 8, -12, -7, -10 });
+            //solution3(new int[] { -1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1 });
+            //solution3(new int[] { -2, -2, -2, 3, 4, 5, -10, 3, 4, 5, -100, -100, -2, -2, 3, 4, 6, -10, 3, 4, 5, -1, -1, 1 });
+            //solution3(new int[] { 0, 1, 0, -1, 0, 1, -1, 1, 1, 1, 0, 1, 0, -1, 1, 0, 1, 0, 1, -1, 1, 0, -1, 0, 0, -1, 1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1 });
+            //solution3(new int[] { 3, 2, 6, -1, 4, 5, -2, 2, -4, 3, 12, -5, 0, 7, -1 });
+            //solution3(new int[] { -1, -2, -3, -4, -5 }); // vsetko zaporne je max 0
+            //solution3(new int[] { 10, 1, 0, 1, 10 }); // 
 
         }
 
@@ -101,12 +124,13 @@ namespace Codility
                 A = reduceLst(A);
             }
 
-            var validData = GetValidCollection(A, out int result);
 
 
             var lst = new List<Tuple<int, int, int>>();
-            getRanges(A, 2, lst);
+            solution3(A);
+            return 0;
 
+            var validData = GetValidCollection(A, out int result);
             if (useLog)
             {
                 logFile = $"R{(useReduction ? 1 : 0)}_O{(useOptimization ? 1 : 0)}_OL{A.Length}_RL{A.Length}.txt";
@@ -178,44 +202,93 @@ namespace Codility
             }
             sw.Stop();
 
-            var msg = $"Brute: {bruteRtn}, ({xR}-{yR}-{zR}), maxSumTotal: {sumTot} ({maxSumTotalA}+{maxSumTotalU}), Elapsed ms: {sw.ElapsedMilliseconds}";
-            if (useLog)
-                File.AppendAllText(logFile, msg + Environment.NewLine);
-            Debug.WriteLine(msg);
+            //var msg = $"Brute: {bruteRtn}, ({xR}-{yR}-{zR}), maxSumTotal: {sumTot} ({maxSumTotalA}+{maxSumTotalU}), Elapsed ms: {sw.ElapsedMilliseconds}";
+            //if (useLog)
+            //    File.AppendAllText(logFile, msg + Environment.NewLine);
+            //Debug.WriteLine(msg);
 
             return sumTot;
         }
 
-        private void getRanges(int[] A, int fromIdx, List<Tuple<int, int, int>> lst)
+        private bool solution3(int[] A)
         {
-            int sum = 0, max = 0, maxIdx = 0, min = 0, minIdx = 0;
-            while (A[fromIdx] < 0) fromIdx++; // opt. zaporne nezlepsia vysledok
-            for (int idx = fromIdx; idx < A.Length - 1; idx++)
+            var bruteStr = "";
+            int bruteRtn = 0;
+            if (useBrute)
             {
-                sum += A[idx];
-                if (sum < min)
-                {
-                    min = sum;
-                    minIdx = idx;
-                }
-                if (sum - min > max)
-                {
-                    max = sum - min;
-                    maxIdx = idx;
-                    Debug.WriteLine($"max: {max}, min: {min}, idx: {minIdx}-{maxIdx}");
-                }
+                bruteRtn = brute(A, out int X, out int Y, out int Z);
+                bruteStr = $"BRUTE: {bruteRtn} ({X}-{Y}-{Z})";
+
+                //var sol1s = solution1sec(A, null);
             }
-            if (maxIdx == 0)
-            {
-                maxIdx = A.Length - 2;
-                lst.Add(Tuple.Create(fromIdx, maxIdx, max));
-            }
+
+            #region pos, negs, zero
+            var hasResult = false;
+            int result = 0;
+            if (A.Length == 3)
+                hasResult = true;
             else
             {
-                lst.Add(Tuple.Create(fromIdx, maxIdx, max));
-                getRanges(A, maxIdx + 1, lst);
-
+                var a = A.Skip(1).Take(A.Length - 2);
+                var anyNeg = a.Any(i => i < 0);
+                var anyPos = a.Any(i => i > 0);
+                if (!anyPos)
+                    hasResult = true;
+                else if (!anyNeg)
+                {
+                    hasResult = true;
+                    result = a.Sum() - a.Min();
+                }
             }
+            #endregion
+
+            if (!hasResult)
+            {
+                int fromIdx = 1, sum = 0, max = 0, maxIdx = 0, min = 0, minIdx = 0, minIdx2 = 0;
+                int ignValue = 0, ignValue2 = 0, ignValueIndex = 0, ignValueIndex2 = 0;
+
+                while (A[fromIdx] < 0) fromIdx++;
+                for (int idx = fromIdx; idx < A.Length - 1; idx++)
+                {
+                    var value = A[idx];
+                    if (value < ignValue)
+                    {
+                        var ignDiff = ignValue - value;
+                        ignValue = value;
+                        ignValueIndex = idx;
+                        sum += ignDiff + value;
+                    }
+                    else
+                    {
+                        sum += value;
+
+                    }
+                    if (sum < min)
+                    {
+                        min = sum;
+                        minIdx = idx;
+                    }
+                    if (sum - min > max)
+                    {
+                        max = sum - min;
+                        maxIdx = idx;
+                        minIdx2 = minIdx;
+                        ignValue2 = ignValue;
+                        ignValueIndex2 = ignValueIndex;
+                        ignValue = 0;
+                        //Debug.WriteLine($"({minIdx2}-{maxIdx}), min: {min}, max: {max}, {minIdx2}-{maxIdx}");
+                    }
+                }
+                int minValue = 0;
+                //if (min < 0)
+                //    minValue = A.Skip(minIdx2 + 1).Take(maxIdx - minIdx2).Min();
+                result = max - minValue;
+            }
+            var str = "";
+            str = String.Join(",", A);
+
+            Debug.WriteLine($"result: {result}, BRUTE: {bruteStr}, ({str})");
+            return result == bruteRtn;
         }
 
         private MDSItem[] GetValidCollection(int[] a, out int result)
@@ -249,13 +322,13 @@ namespace Codility
             {
                 var bn = brute(A, out int xn, out int yn, out int zn);
                 var rtn = c.Sum() - c.Min();
-                Debug.WriteLine($"Brute: max: {bn}, max sol: {rtn}, arr: {string.Join(",", A)}");
+                //Debug.WriteLine($"Brute: max: {bn}, max sol: {rtn}, arr: {string.Join(",", A)}");
 
                 return rtn;
             }
             if (!hasPositives)
             {
-                Debug.WriteLine($"negatives: 0, arr: {string.Join(",", A)}");
+                //Debug.WriteLine($"negatives: 0, arr: {string.Join(",", A)}");
                 return 0;
             }
 
@@ -324,10 +397,10 @@ namespace Codility
             }
             sw.Stop();
 
-            var msg = $"Brute: {bruteRtn}, ({xR}-{yR}-{zR}), maxSumTotal: {maxSumTotal}, Elapsed ms: {sw.ElapsedMilliseconds}";
-            if (useLog)
-                File.AppendAllText(logFile, msg + Environment.NewLine);
-            Debug.WriteLine(msg);
+            // var msg = $"Brute: {bruteRtn}, ({xR}-{yR}-{zR}), maxSumTotal: {maxSumTotal}, Elapsed ms: {sw.ElapsedMilliseconds}";
+            //if (useLog)
+            //    File.AppendAllText(logFile, msg + Environment.NewLine);
+            //Debug.WriteLine(msg);
 
             return maxSumTotal;
         }

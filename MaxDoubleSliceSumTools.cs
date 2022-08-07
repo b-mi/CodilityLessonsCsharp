@@ -234,7 +234,7 @@ namespace Codility
             //sLst = String.Join(", ", ints);
             for (int i = 0; i < ints.Length - 2; i++)
             {
-                Debug.WriteLine($"{i}");
+                //Debug.WriteLine($"{i}");
                 for (int j = i + 1; j < ints.Length - 1; j++)
                 {
                     for (int k = j + 1; k < ints.Length - 0; k++)
