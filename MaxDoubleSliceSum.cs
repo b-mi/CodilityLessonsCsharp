@@ -51,10 +51,10 @@ namespace Codility
             //test(20, -10, 10);
             //test(50, -1, 1);
 
-            //for (int i = 0; i < 1000; i++)
+            //for (int i = 0; i < 100; i++)
             //{
-            //    Debug.WriteLine($"---{i}---");
-            //    genData(7, -7, 7, out int _, out int _, out int _, out var lst, false);
+            //    //Debug.WriteLine($"---{i}---");
+            //    genData(100, -1, 1, out int _, out int _, out int _, out var lst, false);
             //    if (!solution3(lst))
             //    {
 
@@ -70,9 +70,12 @@ namespace Codility
 
             // [0, 10, -5, -2, 0] = correct = 10
 
+            solution3(new int[] { -1, 0, -1, -1, 0, 0, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1, 1, 1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, 1, 0, -1, 0, 0, 0, 1, -1, 0, 1, 0, 0, -1, -1, 1, -1, -1, -1, 0, 1, 1, -1, -1, -1, -1, -1, 1, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 1, 1, 1, 0, 0, 0, -1, 1, 1, 1, -1, -1, -1, -1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 1, 1, 0, -1, 0 }); //SOL3: 6(65-2-80), BRUTE: BRUTE: 7 (65-67-80), [-1,0,-1,-1,0,0,1,0,0,-1,-1,-1,1,1,-1,0,-1,-1,-1,1,1,-1,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,1,0,-1,0,0,0,1,-1,0,1,0,0,-1,-1,1,-1,-1,-1,0,1,1,-1,-1,-1,-1,-1,1,0,0,0,0,-1,-1,1,-1,0,1,1,1,1,0,0,0,-1,1,1,1,-1,-1,-1,-1,1,0,0,0,1,-1,1,0,0,0,0,1,1,0,-1,0]
+            //solution3(new int[] { 1, 0, -1, 0, -1, 1, 1, -1, 1, 1 }); // <>SOL3: 2(4-2-7), BRUTE: BRUTE: 3 (4-7-9), [1,0,-1,0,-1,1,1,-1,1,1]
+            //solution3(new int[] { -2, 6, 2, -7, -2, 3, -7, 7, 5, 5 });//SOL3: 14(0 - 3 - 9), BRUTE: BRUTE: 15(4 - 6 - 9), [-2,6,2,-7,-2,3,-7,7,5,5]
 
-            solution3(new int[] { 6, 5, -4, 3, -7, 5, 6 });
-            //solution3(new int[] { 7, 0, -7, 5, -2, 2, 3 });
+            //solution3(new int[] { 6, 5, -4, 3, -7, 5, 6 }); // brute: 9, nenulovat ignValue
+            //solution3(new int[] { 7, 0, -7, 5, -2, 2, 3 }); // brute: 7, nulovat ignValue
             //solution3(new int[] { 5, 5, -1, -7, 6, 4, -2 });
 
             //solution3(new int[] { -2, 6, 2, -7, -2, 3, -7 });
@@ -244,50 +247,47 @@ namespace Codility
 
             if (!hasResult)
             {
-                int fromIdx = 1, sum = 0, max = 0, maxIdx = 0, min = 0, minIdx = 0, minIdx2 = 0;
-                int ignValue = 0, ignValue2 = 0, ignValueIndex = 0, ignValueIndex2 = 0;
+                //Debug.WriteLine($"-----------{(string.Join(",", A))}----------------");
+                int fromIdx = 1, sum = 0, max = 0, zIdx = 0, min = 0, minIdx = 0, xIdx = 0;
+                int ignValue0 = 0, ignValue = 0, yIdx0 = 0, yIdx = 0;
 
                 while (A[fromIdx] < 0) fromIdx++;
-                for (int idx = fromIdx; idx < A.Length - 1; idx++)
+                for (int zIdx0 = fromIdx; zIdx0 < A.Length - 1; zIdx0++)
                 {
-                    var value = A[idx];
-                    if (value < ignValue)
+                    if (zIdx0 == 71)
                     {
-                        var ignDiff = ignValue - value;
-                        ignValue = value;
-                        ignValueIndex = idx;
+                    }
+                    var value = A[zIdx0];
+                    if (value < ignValue0)
+                    {
+                        var ignDiff = ignValue0 - value;
+                        ignValue0 = value;
+                        yIdx0 = zIdx0;
                         sum += ignDiff + value;
                     }
                     else
                     {
                         sum += value;
-
                     }
                     if (sum < min)
                     {
                         min = sum;
-                        minIdx = idx;
+                        minIdx = zIdx0;
                     }
                     if (sum - min > max)
                     {
                         max = sum - min;
-                        maxIdx = idx;
-                        minIdx2 = minIdx;
-                        ignValue2 = ignValue;
-                        ignValueIndex2 = ignValueIndex;
-                        ignValue = 0;
-                        //Debug.WriteLine($"({minIdx2}-{maxIdx}), min: {min}, max: {max}, {minIdx2}-{maxIdx}");
+                        zIdx = zIdx0;
+                        xIdx = minIdx;
+                        ignValue = ignValue0;
+                        yIdx = yIdx0;
+                        //ignValue = 0;
                     }
                 }
-                int minValue = 0;
-                //if (min < 0)
-                //    minValue = A.Skip(minIdx2 + 1).Take(maxIdx - minIdx2).Min();
-                result = max - minValue;
-            }
-            var str = "";
-            str = String.Join(",", A);
+                result = max - ignValue;
+                Debug.WriteLine($"{(result == bruteRtn ? "" : "<>")}SOL3: {result}({xIdx}-{yIdx}-{zIdx + 1}) (ign: {ignValue}), BRUTE: {bruteStr}, [{(string.Join(",", A))}]");
 
-            Debug.WriteLine($"result: {result}, BRUTE: {bruteStr}, ({str})");
+            }
             return result == bruteRtn;
         }
 
