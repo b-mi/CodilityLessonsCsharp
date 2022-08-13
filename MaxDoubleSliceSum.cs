@@ -260,6 +260,8 @@ namespace Codility
                     var value = A[zIdx0];
                     if (value < ignValue0)
                     {
+                        if (value < ignValue0)
+                        {
                         var ignDiff = ignValue0 - value;
                         ignValue0 = value;
                         yIdx0 = zIdx0;
